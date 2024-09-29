@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>8-bit Clock | Dhaka, Bangladesh.</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #87CEFA, #B0E0E6); /* Added sky blue gradient */
+            font-family: 'Courier New', Courier, monospace;
+            margin: 0;
+        }
+
+        .clock-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 20px;
+            text-align: center;
+        }
+
+        h1, h2, h3 {
+            margin: 10px 0;
+            color: #333;
+        }
+
+        h1 {
+            font-size: 3em;
+        }
+
+        h2 {
+            font-size: 2em;
+        }
+
+        h3 {
+            font-size: 1.5em;
+        }
+    </style>
+</head>
+<body>
+    <div class="clock-container">
+        <div id="clock" class="glass-effect">
+		<h3>Dhaka - Bangladesh</h3>
+            <h1 id="time"></h1>
+            <h2 id="date"></h2>
+            <h3 id="day"></h3>
+        </div>
+    </div>
+    <script>
+        function updateClock() {
+            const now = new Date();
+            const hours = now.getHours();
+            const minutes = now.getMinutes();
+            const seconds = now.getSeconds();
+            const day = now.getDay();
+            const date = now.getDate();
+            const month = now.getMonth();
+            const year = now.getFullYear();
+
+            const ampm = hours >= 12 ? 'PM' : 'AM';
+            const hour12 = hours % 12 || 12;
+            const paddedMinutes = minutes < 10 ? '0' + minutes : minutes;
+            const paddedSeconds = seconds < 10 ? '0' + seconds : seconds;
+
+            const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+            const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+
+            const timeString = `${hour12}:${paddedMinutes}:${paddedSeconds} ${ampm}`;
+            const dateString = `${months[month]} ${date}, ${year}`;
+            const dayString = days[day];
+
+            document.getElementById('time').textContent = timeString;
+            document.getElementById('date').textContent = dateString;
+            document.getElementById('day').textContent = dayString;
+        }
+
+        setInterval(updateClock, 1000);
+        updateClock();
+    </script>
+</body>
+</html>
